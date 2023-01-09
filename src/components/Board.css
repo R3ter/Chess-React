@@ -1,0 +1,10 @@
+#board {
+  max-width: 800px;
+  width: fit-content;
+  display: grid;
+  background-color: white;
+  grid-template-columns: repeat(8, 8fr);
+  grid-template-rows: repeat(8, 8fr);
+  grid-gap: 0px;
+  position: relative;
+}

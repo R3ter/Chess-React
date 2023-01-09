@@ -12,10 +12,10 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-.App-header {
+body {
   background-color: #282c34;
-  min-height: 100vh;
+}
+.App-header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,4 +35,24 @@
   to {
     transform: rotate(360deg);
   }
+}
+div {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+img {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
