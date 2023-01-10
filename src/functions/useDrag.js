@@ -8,25 +8,25 @@ const useDrag = (
   const followMouse = (e) => {
     if (isDragging) ondrag(e);
   };
+  const mouseDown = (e) => {
+    onClick(e);
+    setIsDragging(true);
+  };
+  const mouseup = (e) => {
+    ondrop(e);
+    setIsDragging(false);
+  };
   useEffect(() => {
-    window.addEventListener("mouseup", (e) => {
-      setIsDragging(false);
-    });
-    ref.current.addEventListener("mouseup", (e) => {
-      ondrop(e);
-      setIsDragging(false);
-    });
+    // window.addEventListener("mouseup", mouseup);
+    ref.current.addEventListener("mouseup", mouseup);
 
-    ref.current.addEventListener("mousedown", (e) => {
-      onClick(e);
-      setIsDragging(true);
-    });
+    ref.current.addEventListener("mousedown", mouseDown);
     window.addEventListener("mousemove", followMouse);
     return () => {
       window.removeEventListener("mousemove", followMouse);
-      ref.current.removeEventListener("mousedown", followMouse);
-      ref.current.removeEventListener("mouseup", followMouse);
-      window.removeEventListener("mouseup", followMouse);
+      ref.current.removeEventListener("mousedown", mouseDown);
+      ref.current.removeEventListener("mouseup", mouseup);
+      // window.removeEventListener("mouseup", mouseup);
     };
   }, [isDragging]);
 };

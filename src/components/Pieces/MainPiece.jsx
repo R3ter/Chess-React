@@ -1,16 +1,18 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import useDrag from "../../functions/useDrag";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { movePiece } from "./../../redux/BoardData";
+import getPosition from "../../functions/getPosition";
 
+let clickPos = {};
 const MainPiece = ({ image, alt = "", firstPos }) => {
   const divRef = useRef();
+  console.log(firstPos);
+  firstPos = getPosition.convertPosToNum(firstPos);
   const [translate, setTranslate] = useState(firstPos);
 
-  let clickPos = {};
-  const { board } = useSelector((state) => state.board);
   const dispatch = useDispatch();
-  console.log(board);
+  // console.log(board);
   useDrag(divRef, {
     onClick: (e) => {
       const rect = e.target.parentElement.getBoundingClientRect();
@@ -31,7 +33,7 @@ const MainPiece = ({ image, alt = "", firstPos }) => {
       const x = Math.round(Math.round(e.clientX - rect.left - 50) / 100) * 100;
       const y = Math.round(Math.round(e.clientY - rect.top - 50) / 100) * 100;
 
-      dispatch(movePiece({ from: clickPos, to: { x: x / 100, y: y / 100 } }));
+      dispatch(movePiece({ from: clickPos, to: { x: x, y: y } }));
     },
   });
   return (
@@ -53,7 +55,7 @@ const MainPiece = ({ image, alt = "", firstPos }) => {
           height: "100%",
           WebkitTapHighlightColor: "transparent",
         }}
-        src={image}
+        src={require("./../../images/" + image + ".svg")}
         alt={alt}
       />
     </div>
