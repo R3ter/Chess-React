@@ -17,12 +17,15 @@ const useDrag = (
     setIsDragging(false);
   };
   useEffect(() => {
+    if (!ref.current) return;
     // window.addEventListener("mouseup", mouseup);
     ref.current.addEventListener("mouseup", mouseup);
 
     ref.current.addEventListener("mousedown", mouseDown);
     window.addEventListener("mousemove", followMouse);
     return () => {
+      if (!ref.current) return;
+
       window.removeEventListener("mousemove", followMouse);
       ref.current.removeEventListener("mousedown", mouseDown);
       ref.current.removeEventListener("mouseup", mouseup);

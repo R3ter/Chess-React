@@ -7,7 +7,6 @@ import getPosition from "../../functions/getPosition";
 let clickPos = {};
 const MainPiece = ({ image, alt = "", firstPos }) => {
   const divRef = useRef();
-  console.log(firstPos);
   firstPos = getPosition.convertPosToNum(firstPos);
   const [translate, setTranslate] = useState(firstPos);
 
@@ -32,8 +31,18 @@ const MainPiece = ({ image, alt = "", firstPos }) => {
       const rect = e.target.parentElement.getBoundingClientRect();
       const x = Math.round(Math.round(e.clientX - rect.left - 50) / 100) * 100;
       const y = Math.round(Math.round(e.clientY - rect.top - 50) / 100) * 100;
-
-      dispatch(movePiece({ from: clickPos, to: { x: x, y: y } }));
+      dispatch(
+        movePiece({
+          from: clickPos,
+          to: { x: x, y: y },
+          pass: () => {
+            setTranslate({ x, y });
+          },
+          rej: () => {
+            setTranslate(clickPos);
+          },
+        })
+      );
     },
   });
   return (

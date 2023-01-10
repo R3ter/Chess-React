@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Board.css";
 import LineOfBlocks from "./lineOfBlocks";
 import { useSelector } from "react-redux";
 import MainPiece from "./Pieces/MainPiece";
 const Board = () => {
-  const { board } = useSelector((state) => state.board);
+  const { board } = useSelector((state) => {
+    return state.board;
+  });
   console.log(board);
   let f = true;
   return (
