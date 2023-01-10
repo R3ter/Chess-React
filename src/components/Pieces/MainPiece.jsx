@@ -1,14 +1,16 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import useDrag from "../../functions/useDrag";
-let clickPos = { x: 0, y: 0 };
-const MainPiece = ({ PossibleMoves, image, alt = "", firstPos }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { movePiece } from "./../../redux/BoardData";
+
+const MainPiece = ({ image, alt = "", firstPos }) => {
   const divRef = useRef();
   const [translate, setTranslate] = useState(firstPos);
-  // GridValues.forEach((e)=>{
-  //   if(e.Component==this){
-  //     console.log("S")
-  //   }
-  // })
+
+  let clickPos = {};
+  const { board } = useSelector((state) => state.board);
+  const dispatch = useDispatch();
+  console.log(board);
   useDrag(divRef, {
     onClick: (e) => {
       const rect = e.target.parentElement.getBoundingClientRect();
@@ -28,15 +30,8 @@ const MainPiece = ({ PossibleMoves, image, alt = "", firstPos }) => {
       const rect = e.target.parentElement.getBoundingClientRect();
       const x = Math.round(Math.round(e.clientX - rect.left - 50) / 100) * 100;
       const y = Math.round(Math.round(e.clientY - rect.top - 50) / 100) * 100;
-      if (x > 700 || x < 0) {
-        setTranslate(clickPos);
-        return;
-      }
 
-      setTranslate({
-        x,
-        y,
-      });
+      dispatch(movePiece({ from: clickPos, to: { x: x / 100, y: y / 100 } }));
     },
   });
   return (
