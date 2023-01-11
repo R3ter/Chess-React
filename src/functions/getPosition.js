@@ -18,7 +18,7 @@ export const funcs = {
   },
   getBlockState: (x, y, board) => {
     const pos = funcs.convertNumToPos({ x, y });
-    console.log(board[pos.x + pos.y]);
+    if (x > 800 || x < 0 || y > 800 || y < 0) return false;
     return board[pos.x + pos.y] == undefined;
   },
 };

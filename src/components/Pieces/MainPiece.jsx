@@ -20,6 +20,7 @@ const MainPiece = ({ image, alt = "", firstPos }) => {
       clickPos = { x, y };
     },
     ondrag: (e) => {
+      if (!e.target || !e.target.parentElement) return;
       const rect = e.target.parentElement.getBoundingClientRect();
       const x = e.clientX - rect.left - 50;
       const y = e.clientY - rect.top - 50;

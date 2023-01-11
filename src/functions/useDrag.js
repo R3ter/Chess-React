@@ -6,6 +6,7 @@ const useDrag = (
 ) => {
   const [isDragging, setIsDragging] = useState(false);
   const followMouse = (e) => {
+    if (!e) return;
     if (isDragging) ondrag(e);
   };
   const mouseDown = (e) => {
