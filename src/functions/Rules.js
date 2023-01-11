@@ -24,13 +24,13 @@ export default {
           moves.push(pos.x + pos.y);
         } else break;
       }
-      for (let i = x - 100; i > 0; i -= 100) {
+      for (let i = x - 100; i >= 0; i -= 100) {
         if (funcs.getBlockState(i, y, board)) {
           const pos = funcs.convertNumToPos({ x: i, y });
           moves.push(pos.x + pos.y);
         } else break;
       }
-      for (let i = y - 100; i > 0; i -= 100) {
+      for (let i = y - 100; i >= 0; i -= 100) {
         if (funcs.getBlockState(x, i, board)) {
           const pos = funcs.convertNumToPos({ x, y: i });
           moves.push(pos.x + pos.y);
@@ -166,13 +166,13 @@ export default {
         } else break;
       }
 
-      for (let i = x - 100; i > 0; i -= 100) {
+      for (let i = x - 100; i >= 0; i -= 100) {
         if (funcs.getBlockState(i, y, board)) {
           const pos = funcs.convertNumToPos({ x: i, y });
           moves.push(pos.x + pos.y);
         } else break;
       }
-      for (let i = y - 100; i > 0; i -= 100) {
+      for (let i = y - 100; i >= 0; i -= 100) {
         if (funcs.getBlockState(x, i, board)) {
           const pos = funcs.convertNumToPos({ x, y: i });
           moves.push(pos.x + pos.y);

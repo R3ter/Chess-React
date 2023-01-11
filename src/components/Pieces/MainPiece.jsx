@@ -1,32 +1,45 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import useDrag from "../../functions/useDrag";
 import { useDispatch } from "react-redux";
-import { movePiece } from "./../../redux/BoardData";
+import { movePiece, setHighlighted } from "./../../redux/BoardData";
 import { funcs } from "../../functions/getPosition";
+import Rules from "../../functions/Rules";
 
 let clickPos = {};
-const MainPiece = ({ image, alt = "", firstPos }) => {
+let holdingElement = null;
+const MainPiece = ({ image, alt = "", firstPos, board }) => {
   const divRef = useRef();
   firstPos = funcs.convertPosToNum(firstPos);
+  firstPos.z = 1;
   const [translate, setTranslate] = useState(firstPos);
 
   const dispatch = useDispatch();
   // console.log(board);
   useDrag(divRef, {
     onClick: (e) => {
+      holdingElement = e.target;
       const rect = e.target.parentElement.getBoundingClientRect();
       const x = Math.round(Math.round(e.clientX - rect.left - 50) / 100) * 100;
       const y = Math.round(Math.round(e.clientY - rect.top - 50) / 100) * 100;
       clickPos = { x, y };
+      const pos = funcs.convertNumToPos(clickPos);
+      dispatch(
+        setHighlighted(
+          Rules.walk[board[pos.x + pos.y]](pos.x, pos.y, board).map((e) =>
+            funcs.convertPosToNum(e)
+          )
+        )
+      );
     },
     ondrag: (e) => {
       if (!e.target || !e.target.parentElement) return;
       const rect = e.target.parentElement.getBoundingClientRect();
       const x = e.clientX - rect.left - 50;
       const y = e.clientY - rect.top - 50;
-      setTranslate({ x, y });
+      setTranslate({ x, y, z: 100 });
     },
     ondrop: (e) => {
+      if (e.target !== holdingElement) return;
       const rect = e.target.parentElement.getBoundingClientRect();
       const x = Math.round(Math.round(e.clientX - rect.left - 50) / 100) * 100;
       const y = Math.round(Math.round(e.clientY - rect.top - 50) / 100) * 100;
@@ -51,6 +64,7 @@ const MainPiece = ({ image, alt = "", firstPos }) => {
         position: "absolute",
         left: `${translate.x}px`,
         top: `${translate.y}px`,
+        zIndex: translate.z,
         width: "100px",
         WebkitTapHighlightColor: "transparent",
         height: "100px",

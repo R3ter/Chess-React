@@ -5,5 +5,6 @@ export default configureStore({
     getDefaultMiddleware({ serializableCheck: false }),
   reducer: {
     board: BoardData,
+    Highlighted: BoardData,
   },
 });

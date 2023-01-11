@@ -23,9 +23,15 @@ export const boardSlice = createSlice({
       g1: "Pawn",
       h1: "Pawn",
     },
-    holding: false,
+
+    Highlighted: [],
+    Turn: "White",
   },
   reducers: {
+    setHighlighted: (state, { payload }) => {
+      console.log(payload);
+      state.Highlighted = payload;
+    },
     movePiece: (state, { payload: { from, to, pass, rej } }) => {
       to = funcs.convertNumToPos({ x: to.x, y: to.y });
       from = funcs.convertNumToPos({ x: from.x, y: from.y });
@@ -55,6 +61,6 @@ export const boardSlice = createSlice({
   },
 });
 
-export const { movePiece } = boardSlice.actions;
+export const { movePiece, setHighlighted } = boardSlice.actions;
 
 export default boardSlice.reducer;
