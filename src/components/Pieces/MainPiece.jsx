@@ -2,12 +2,12 @@ import React, { useState, useRef, useContext, useEffect } from "react";
 import useDrag from "../../functions/useDrag";
 import { useDispatch } from "react-redux";
 import { movePiece } from "./../../redux/BoardData";
-import getPosition from "../../functions/getPosition";
+import { funcs } from "../../functions/getPosition";
 
 let clickPos = {};
 const MainPiece = ({ image, alt = "", firstPos }) => {
   const divRef = useRef();
-  firstPos = getPosition.convertPosToNum(firstPos);
+  firstPos = funcs.convertPosToNum(firstPos);
   const [translate, setTranslate] = useState(firstPos);
 
   const dispatch = useDispatch();
@@ -20,8 +20,6 @@ const MainPiece = ({ image, alt = "", firstPos }) => {
       clickPos = { x, y };
     },
     ondrag: (e) => {
-      if (!e.target.parentElement) return;
-
       const rect = e.target.parentElement.getBoundingClientRect();
       const x = e.clientX - rect.left - 50;
       const y = e.clientY - rect.top - 50;

@@ -1,6 +1,6 @@
 const alpha = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
-export default {
+export const funcs = {
   convertNumToPos: ({ x, y }) => {
     if (y >= 800 || y < 0) return { y: undefined, x: undefined };
     return { x: alpha[x / 100], y: y / 100 };
@@ -15,5 +15,10 @@ export default {
       !isNaN(x) ||
       isNaN(y)
     );
+  },
+  getBlockState: (x, y, board) => {
+    const pos = funcs.convertNumToPos({ x, y });
+    console.log(board[pos.x + pos.y]);
+    return board[pos.x + pos.y] == undefined;
   },
 };

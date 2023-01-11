@@ -7,7 +7,6 @@ const Board = () => {
   const { board } = useSelector((state) => {
     return state.board;
   });
-  console.log(board);
   let f = true;
   return (
     <div id="board">
@@ -16,7 +15,8 @@ const Board = () => {
         return <LineOfBlocks key={x} x={f} />;
       })}
       {Object.keys(board).map((key, index) => {
-        return <MainPiece firstPos={key} image={board[key]} key={index} />;
+        if (board[key])
+          return <MainPiece firstPos={key} image={board[key]} key={index} />;
       })}
     </div>
   );
