@@ -126,11 +126,101 @@ export default {
       return moves;
     },
     Queen: (x, y, board) => {
-      return [];
+      const moves = [];
+
+      const originPos = funcs.convertPosToNum(x + y);
+      x = originPos.x;
+      y = originPos.y;
+      //for loop with x and y moving sloping down right
+      for (let i = y + 100, j = x + 100; i < 800; i += 100, j += 100) {
+        if (funcs.getBlockState(j, i, board)) {
+          const pos = funcs.convertNumToPos({ x: j, y: i });
+          moves.push(pos.x + pos.y);
+        } else break;
+      }
+      //for loop with x and y moving sloping down left
+      for (let i = y + 100, j = x - 100; i < 800; i += 100, j -= 100) {
+        if (funcs.getBlockState(j, i, board)) {
+          const pos = funcs.convertNumToPos({ x: j, y: i });
+          moves.push(pos.x + pos.y);
+        } else break;
+      }
+      //for loop with x and y moving sloping up right
+      for (let i = y - 100, j = x + 100; i >= 0; i -= 100, j += 100) {
+        if (funcs.getBlockState(j, i, board)) {
+          const pos = funcs.convertNumToPos({ x: j, y: i });
+          moves.push(pos.x + pos.y);
+        } else break;
+      }
+      //for loop with x and y moving sloping up left
+      for (let i = y - 100, j = x - 100; i >= 0; i -= 100, j -= 100) {
+        if (funcs.getBlockState(j, i, board)) {
+          const pos = funcs.convertNumToPos({ x: j, y: i });
+          moves.push(pos.x + pos.y);
+        } else break;
+      }
+      for (let i = x + 100; i < 800; i += 100) {
+        if (funcs.getBlockState(i, y, board)) {
+          const pos = funcs.convertNumToPos({ x: i, y });
+          moves.push(pos.x + pos.y);
+        } else break;
+      }
+
+      for (let i = x - 100; i > 0; i -= 100) {
+        if (funcs.getBlockState(i, y, board)) {
+          const pos = funcs.convertNumToPos({ x: i, y });
+          moves.push(pos.x + pos.y);
+        } else break;
+      }
+      for (let i = y - 100; i > 0; i -= 100) {
+        if (funcs.getBlockState(x, i, board)) {
+          const pos = funcs.convertNumToPos({ x, y: i });
+          moves.push(pos.x + pos.y);
+        } else break;
+      }
+      for (let i = y + 100; i < 800; i += 100) {
+        if (funcs.getBlockState(x, i, board)) {
+          const pos = funcs.convertNumToPos({ x, y: i });
+          moves.push(pos.x + pos.y);
+        } else break;
+      }
+      return moves;
     },
     Bishop: (x, y, board) => {
-      
-      return [];
+      const moves = [];
+
+      const originPos = funcs.convertPosToNum(x + y);
+      x = originPos.x;
+      y = originPos.y;
+      //for loop with x and y moving sloping down right
+      for (let i = y + 100, j = x + 100; i < 800; i += 100, j += 100) {
+        if (funcs.getBlockState(j, i, board)) {
+          const pos = funcs.convertNumToPos({ x: j, y: i });
+          moves.push(pos.x + pos.y);
+        } else break;
+      }
+      //for loop with x and y moving sloping down left
+      for (let i = y + 100, j = x - 100; i < 800; i += 100, j -= 100) {
+        if (funcs.getBlockState(j, i, board)) {
+          const pos = funcs.convertNumToPos({ x: j, y: i });
+          moves.push(pos.x + pos.y);
+        } else break;
+      }
+      //for loop with x and y moving sloping up right
+      for (let i = y - 100, j = x + 100; i >= 0; i -= 100, j += 100) {
+        if (funcs.getBlockState(j, i, board)) {
+          const pos = funcs.convertNumToPos({ x: j, y: i });
+          moves.push(pos.x + pos.y);
+        } else break;
+      }
+      //for loop with x and y moving sloping up left
+      for (let i = y - 100, j = x - 100; i >= 0; i -= 100, j -= 100) {
+        if (funcs.getBlockState(j, i, board)) {
+          const pos = funcs.convertNumToPos({ x: j, y: i });
+          moves.push(pos.x + pos.y);
+        } else break;
+      }
+      return moves;
     },
   },
 };
