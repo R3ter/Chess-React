@@ -14,7 +14,6 @@ const MainPiece = ({ image, alt = "", firstPos, board }) => {
   const [translate, setTranslate] = useState(firstPos);
 
   const dispatch = useDispatch();
-  // console.log(board);
   useDrag(divRef, {
     onClick: (e) => {
       holdingElement = e.target;
@@ -67,6 +66,8 @@ const MainPiece = ({ image, alt = "", firstPos, board }) => {
         zIndex: translate.z,
         width: "100px",
         WebkitTapHighlightColor: "transparent",
+        display: "flex",
+        justifyContent: "center",
         height: "100px",
       }}
     >
@@ -83,5 +84,4 @@ const MainPiece = ({ image, alt = "", firstPos, board }) => {
     </div>
   );
 };
-
 export default MainPiece;

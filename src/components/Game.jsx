@@ -7,6 +7,7 @@ const Game = () => {
       style={{
         display: "flex",
         justifyContent: "center",
+        paddingBottom: "100px",
       }}
     >
       <Board></Board>;
