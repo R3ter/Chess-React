@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import useDrag from "../../functions/useDrag";
 import { useDispatch } from "react-redux";
 import { movePiece, setHighlighted } from "./../../redux/BoardData";
@@ -22,16 +22,16 @@ const MainPiece = ({ image, alt = "", firstPos, board }) => {
       const y = Math.round(Math.round(e.clientY - rect.top - 50) / 100) * 100;
       clickPos = { x, y };
       const pos = funcs.convertNumToPos(clickPos);
-
-      dispatch(
-        setHighlighted(
-          board[pos.x + pos.y]
-            ? Rules.walk[board[pos.x + pos.y].type](pos.x, pos.y, board).map(
-                (e) => funcs.convertPosToNum(e)
-              )
-            : []
-        )
-      );
+      if (board[pos.x + pos.y])
+        dispatch(
+          setHighlighted(
+            Rules[board[pos.x + pos.y].player].walk[board[pos.x + pos.y].type](
+              pos.x,
+              pos.y,
+              board
+            ).map((e) => funcs.convertPosToNum(e))
+          )
+        );
     },
     ondrag: (e) => {
       if (!e.target || !e.target.parentElement) return;
@@ -53,17 +53,15 @@ const MainPiece = ({ image, alt = "", firstPos, board }) => {
             setTranslate({ x, y });
             clickPos = { x, y };
             const pos = funcs.convertNumToPos(clickPos);
-            dispatch(
-              setHighlighted(
-                board[pos.x + pos.y]
-                  ? Rules.walk[board[pos.x + pos.y].type](
-                      pos.x,
-                      pos.y,
-                      board
-                    ).map((e) => funcs.convertPosToNum(e))
-                  : []
-              )
-            );
+
+            if (board[pos.x + pos.y])
+              dispatch(
+                setHighlighted(
+                  Rules[board[pos.x + pos.y].player].walk[
+                    board[pos.x + pos.y].type
+                  ](pos.x, pos.y, board).map((e) => funcs.convertPosToNum(e))
+                )
+              );
           },
           rej: () => {
             setTranslate(clickPos);

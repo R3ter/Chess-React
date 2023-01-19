@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Board.css";
 import LineOfBlocks from "./lineOfBlocks";
 import { useSelector } from "react-redux";
 import MainPiece from "./Pieces/MainPiece";
 const Board = () => {
-  const { board, Highlighted, board2 } = useSelector((state) => {
+  const { board, Highlighted } = useSelector((state) => {
     return state.board;
   });
   let f = true;
@@ -24,17 +24,7 @@ const Board = () => {
               key={index}
             />
           );
-      })}
-      {Object.keys(board2).map((key, index) => {
-        if (board2[key])
-          return (
-            <MainPiece
-              firstPos={key}
-              image={board2[key].type}
-              board={board2}
-              key={index}
-            />
-          );
+        return "";
       })}
     </div>
   );
