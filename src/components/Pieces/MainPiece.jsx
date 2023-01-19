@@ -49,6 +49,15 @@ const MainPiece = ({ image, alt = "", firstPos, board }) => {
           to: { x: x, y: y },
           pass: () => {
             setTranslate({ x, y });
+            clickPos = { x, y };
+            const pos = funcs.convertNumToPos(clickPos);
+            dispatch(
+              setHighlighted(
+                Rules.walk[board[pos.x + pos.y]](pos.x, pos.y, board).map((e) =>
+                  funcs.convertPosToNum(e)
+                )
+              )
+            );
           },
           rej: () => {
             setTranslate(clickPos);
