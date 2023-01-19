@@ -22,11 +22,14 @@ const MainPiece = ({ image, alt = "", firstPos, board }) => {
       const y = Math.round(Math.round(e.clientY - rect.top - 50) / 100) * 100;
       clickPos = { x, y };
       const pos = funcs.convertNumToPos(clickPos);
+
       dispatch(
         setHighlighted(
-          Rules.walk[board[pos.x + pos.y]](pos.x, pos.y, board).map((e) =>
-            funcs.convertPosToNum(e)
-          )
+          board[pos.x + pos.y]
+            ? Rules.walk[board[pos.x + pos.y].type](pos.x, pos.y, board).map(
+                (e) => funcs.convertPosToNum(e)
+              )
+            : []
         )
       );
     },
@@ -52,9 +55,13 @@ const MainPiece = ({ image, alt = "", firstPos, board }) => {
             const pos = funcs.convertNumToPos(clickPos);
             dispatch(
               setHighlighted(
-                Rules.walk[board[pos.x + pos.y]](pos.x, pos.y, board).map((e) =>
-                  funcs.convertPosToNum(e)
-                )
+                board[pos.x + pos.y]
+                  ? Rules.walk[board[pos.x + pos.y].type](
+                      pos.x,
+                      pos.y,
+                      board
+                    ).map((e) => funcs.convertPosToNum(e))
+                  : []
               )
             );
           },

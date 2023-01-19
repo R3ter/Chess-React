@@ -19,18 +19,18 @@ const Board = () => {
           return (
             <MainPiece
               firstPos={key}
-              image={board[key]}
+              image={board[key].type}
               board={board}
               key={index}
             />
           );
       })}
       {Object.keys(board2).map((key, index) => {
-        if (board2[key]) 
+        if (board2[key])
           return (
             <MainPiece
               firstPos={key}
-              image={board2[key]}
+              image={board2[key].type}
               board={board2}
               key={index}
             />
