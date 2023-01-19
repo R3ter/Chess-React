@@ -5,12 +5,15 @@ const player1 = {
     Pawn: (x, y, board) => {
       if (
         !funcs.getBlockState(
-          funcs.convertPosToNum(x + y).x + 100,
-          funcs.convertPosToNum(x + y).y + 100,
+          funcs.convertPosToNum(x + y).x,
+          funcs.convertPosToNum(x + y).y,
           board
         )
-      )
-        return [x + 1 + (y + 1), x - 1 + (y + 1)];
+      ) {
+        const pos = funcs.convertPosToNum({ x, y });
+        console.log(pos);
+        return [x - 1 + (y - 1)];
+      }
       return [];
     },
   },

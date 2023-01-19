@@ -29,7 +29,13 @@ const MainPiece = ({ image, alt = "", firstPos, board }) => {
               pos.x,
               pos.y,
               board
-            ).map((e) => funcs.convertPosToNum(e))
+            )
+              .map((e) => funcs.convertPosToNum(e))
+              .concat(
+                Rules[board[pos.x + pos.y].player].kill[
+                  board[pos.x + pos.y].type
+                ](pos.x, pos.y, board).map((e) => funcs.convertPosToNum(e))
+              )
           )
         );
     },
